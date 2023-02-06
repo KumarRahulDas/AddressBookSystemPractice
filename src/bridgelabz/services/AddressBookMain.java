@@ -84,5 +84,16 @@ public class AddressBookMain {
         person.setPhone(scanner.nextLine());
         return person;
     }
-
+    private static void deletePerson() {
+        System.out.print("\nEnter the first name of the person to delete : ");
+        String firstName = scanner.nextLine();
+        Person newPerson = personMap.get(firstName);
+        System.out.println(newPerson.toString());
+        if (newPerson != null) {
+            personMap.remove(firstName);
+            System.out.println("Deleted Successfully");
+        } else {
+            System.out.println("Record not exist");
+        }
+    }
 }
