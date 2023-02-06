@@ -47,9 +47,28 @@ public class AddressBookMain {
 
 
     }
-
-
     private static void addPersonDetail(){
+        Person person = new Person();
+        person = contactFields();
+        personMap.put(person.getFirstName(),person);
+        System.out.println(personMap.toString());
+    }
+    private static void editContact(){
+        System.out.print("\nEnter the first name of the person to edit : ");
+        String firstName = scanner.nextLine();
+        Person newPerson = personMap.get(firstName);
+        System.out.println(newPerson.toString());
+        if (personMap.get(firstName) != null){
+            Person person = contactFields();
+            for (int j = 0; j < personMap.size(); j++) {
+                if (personMap.get(firstName).getFirstName().equalsIgnoreCase(newPerson.getFirstName())) {
+                    personMap.put(person.getFirstName(), person);
+                }
+            }
+        }
+        System.out.println("\n\t\t" + personMap.toString());
+    }
+    private static Person contactFields(){
         Person person = new Person();
         System.out.print("Enter First Name : ");
         person.setFirstName(scanner.nextLine());
@@ -63,8 +82,7 @@ public class AddressBookMain {
         person.setZip(scanner.nextLine());
         System.out.print("Enter Phone Number : ");
         person.setPhone(scanner.nextLine());
-
-        personMap.put(person.getFirstName(),person);
-        System.out.println(personMap.toString());
+        return person;
     }
+
 }
