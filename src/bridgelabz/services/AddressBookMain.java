@@ -3,11 +3,13 @@ import bridgelabz.model.Person;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 public class AddressBookMain {
     private static Scanner scanner = new Scanner(System.in);
     private static Map<String, Person> personMap = new HashMap();
     private static Map<String, Map<String, Person>> addressBookMap = new HashMap();
     public static void main(String[] args) {
+
         boolean isExit = false;
 
         do {
@@ -16,6 +18,7 @@ public class AddressBookMain {
             System.out.println("\t\tEnter E to Edit Person");
             System.out.println("\t\tEnter D to Delete Person");
             System.out.println("\t\tEnter S to Search Person");
+            System.out.println("\t\tEnter C to Count Persons In City");
             System.out.println("\t\tEnter P to Print Address Book");
             System.out.println("\t\tEnter Q to Quit ");
             System.out.print("\t\tPlease Select One Option : ");
@@ -45,7 +48,12 @@ public class AddressBookMain {
                     //Search
                     System.out.print("\nEnter the city name of the person to search : ");
                     String pCity = scanner.nextLine();
-                    searchPerson(pCity);
+                    System.out.println("\nPersons in city " + pCity + " is : " + searchPerson(pCity));
+                    break;
+                case 'C':
+                    System.out.print("\nEnter the city name to count persons : ");
+                    String countCity = scanner.nextLine();
+                    System.out.println("\nNumber of Persons in city " + countCity + " is " + personsCountByCity(countCity));
                     break;
                 case 'P':
                     //print
@@ -121,9 +129,15 @@ public class AddressBookMain {
 
         System.out.println("\n\t\t" + addressBookMap.toString());
     }
-    private static void searchPerson(String city) {
+    private static Map<String, Map<String, Person>> searchPerson(String city) {
+        Map<String, Map<String, Person>> personsByCity = new HashMap();
         addressBookMap.entrySet().stream()
                 .filter(e ->e.getKey().equalsIgnoreCase(city))
-                .forEach(m -> System.out.println(m));
+                .forEach(entry -> personsByCity.put(entry.getKey(), entry.getValue()));
+        return personsByCity;
+    }
+    private static int personsCountByCity(String city){
+        Map<String, Map<String, Person>> personCount = searchPerson(city);
+        return personCount.get(city).size();
     }
 }
