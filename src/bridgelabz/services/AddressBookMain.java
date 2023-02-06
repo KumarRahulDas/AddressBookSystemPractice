@@ -48,7 +48,7 @@ public class AddressBookMain {
 
     }
     private static void addPersonDetail(){
-        Person person = new Person();
+        Person person ;
         person = contactFields();
         personMap.put(person.getFirstName(),person);
         System.out.println(personMap.toString());
@@ -65,6 +65,8 @@ public class AddressBookMain {
                     personMap.put(person.getFirstName(), person);
                 }
             }
+        }else {
+            System.out.println("Record Not Found");
         }
         System.out.println("\n\t\t" + personMap.toString());
     }
