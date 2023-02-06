@@ -59,6 +59,7 @@ public class AddressBookMain {
                     System.out.println("Please select correct option");
             }
         } while (!isExit);
+
     }
     private static void editContact(String firstName, String cityName) {
         personMap = addressBookMap.get(cityName);
@@ -105,6 +106,7 @@ public class AddressBookMain {
         } else {
             System.out.println("Record not exist");
         }
+
     }
     private static void addBook() {
         Map<String, Person> newPersonMap = new HashMap();
